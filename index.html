@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Music List</title>
+    <style>
+     *{
+         padding: 0;
+         margin: 0;
+         box-sizing: border-box;
+     }
+
+     body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins", sans-serif;
+    margin:0;
+    min-height:  100vh;
+    background: rgb(22,54, 67);
+    
+   
+}
+.tug {
+         position: fixed;
+         top: 10px;
+         right: 10px;
+     }
+ label {
+         border-radius: 50%;
+         cursor: pointer;
+         width: 50px;
+         height: 50px;
+         user-select: none;
+         background-color: rgb(22,54, 67);
+         transition: background 0.3s linear;
+         
+
+    }
+input {
+         visibility: hidden;
+     }
+.container {
+    width: 500px;
+    height: 500px;
+    /*background: url("folder/mus2.jpg");*/
+    position: relative;
+    
+   
+}
+     
+      .durate {
+          display: flex;
+          justify-content: center;
+          font-size: 2.5rem;
+          position: absolute;
+          bottom: 50px;
+          left: 40px;
+         
+        }
+      audio{
+          background-color:blueviolet;
+          color: red;
+      }
+      button {
+          padding: 13px 15px;
+          border:none;
+        
+         
+
+      }
+      #text {
+          text-align: center;
+          
+          font-size: 1.8rem;
+          padding: 16px 8px;
+          font-style: italic;
+          
+          color: white;
+          top: 100px;
+          left: 50px;
+          position: absolute;
+
+      }
+      #prev {
+          background: crimson;
+          font-size: 17px;
+          border-top-left-radius: 10px;
+          border-bottom-left-radius: 10px;
+      }
+      body.dark {
+background: rgb(43, 31, 15);
+background-repeat: no-repeat;
+background-position: center;
+
+color: whitesmoke;
+}
+     #next {
+         background:blue;
+         font-size: 17px;
+         border-top-right-radius: 10px;
+          border-bottom-right-radius: 10px;
+     }
+     
+     
+    </style>
+</head>
+<body>
+    <div class="tug">
+    <input type="checkbox" id="toggle" name="toggle"><label for="toggle"></label>
+</div>
+    <div class="container">
+        
+            <img src="folder/mus2.jpg" alt=""  id="imagebg">
+        
+        <div id="text">
+        Sholla Allyson ~ Oro Oluwa
+        </div>
+    
+    <div class="durate">
+        
+    <button id="prev">Prev</button>
+    <audio src="musiclist/Allyson -Mimo.mp3" controls id="music-lib" data-bg="red">
+
+    </audio>
+
+        <button  id="next">Next</button>
+    
+    </div>
+</div>
+
+    <script>
+        var  music = [
+            "musiclist/Allyson -Mimo.mp3",
+            "musiclist/08 He's Able.mp3",
+            "musiclist/38Eledumare.mp3",
+            "musiclist/DANSAKI.mp3",
+            "musiclist/Allyson_Oro Oluwa.mp3",
+            "musiclist/Di-mi-mu.mp3",
+            "musiclist/Dunsin-Oyekan-Amazing.mp3",
+            "musiclist/03 mo fi o se baba.mp3",
+            "musiclist/5 PRAISE MELLODY.mp3",
+            "musiclist/[Waploaded]_Tope_Alabi_-_Ebami_Ki-1521446906.mp3"
+        ];
+        var singer = [
+            "Sholla Allyson ~ Mimo",
+            "James Stewart ~ He's Able ",
+            "Kunle Ara ~ ELEDUMARE",
+            "Yum abraham ~ DANSAKI",
+            "Sholla Allyson ~ Oro Oluwa  ",
+            "Yemi Adesiyan ~ Di mimu",
+            "Dusin Oyekan ~ Amazing ",
+            "Elon Musk ~ Mo fi o se baba ",
+            "Dare Mellody ~ Praise Mellody",
+            "Tope alabi ~ E BAMI KI",
+            "Sholla Allyson ~ Mimo"
+        ];
+
+        var images = [
+            "folder/mus2.jpg",
+            "folder/mus3.jpg",
+            "folder/mus4.jpg",
+            "folder/mus5.jpg",
+            "folder/mus60.jpg",
+            "folder/mus7.jpg",
+            "folder/mus8.jpg",
+            "folder/mus2.jpg",
+            "folder/mus4.jpg",
+            "folder/mus10.jpg",
+            "folder/mus7.jpg"
+        ];
+        console.log(images);
+        var singerName = document.getElementById('text')
+        var nxt = document.getElementById('next');
+        var prev = document.getElementById('prev');
+        var num = 0;
+        
+        
+        function play() {
+            var lib = document.getElementById("music-lib");
+            var imag = document.getElementById('imagebg');
+            num++;
+            console.log(imag);
+            singerName.textContent = singer[num];
+            imag.src = images[num];
+            if (num >= music.length) {
+                num = 0;
+                
+              
+            }
+          lib.src=music[num];
+        lib.play();
+        
+         
+        }
+      nxt.addEventListener("click", play, false);
+      function pause() {
+        var lib = document.getElementById("music-lib");
+        var imag = document.getElementById('imagebg');
+            num--;
+            singerName.textContent = singer[num];
+            
+            if (num >= music.length) {
+                music = music - 1;
+                
+
+              
+            } 
+                
+            imag.src = images[num];
+          lib.src=music[num];
+          
+      }
+     prev.addEventListener('click', pause, false);
+     /*let index = 0;
+      function writer(){
+     
+        singerName.innerText=singer[num].slice(0, index);
+       index++;
+        
+       if(index > singer.length){
+           index=0;
+       }
+      }
+    setTimeout(writer, 100);*/
+
+    </script>
+</body>
+</html>
